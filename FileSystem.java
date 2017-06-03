@@ -271,26 +271,26 @@ public class FileSystem {
 	private boolean deallocAllBlocks(FileTableEntry ftEnt) 
 	{
 		if (ftEnt.inode.count != 1) {
-      return false;
-    }
-    byte[] arrayOfByte = ftEnt.inode.unregisterIndexBlock();
-    if (arrayOfByte != null)
-    {
-      int i = 0;
-      int j;
-      while ((j = SysLib.bytes2short(arrayOfByte, i)) != -1) {
-        this.superblock.returnBlock(j);
-      }
-    }
-    for (int i = 0; i < 11; i++) {
-      if (ftEnt.inode.direct[i] != -1)
-      {
-        this.superblock.returnBlock(ftEnt.inode.direct[i]);
-        ftEnt.inode.direct[i] = -1;
-      }
-    }
-    ftEnt.inode.toDisk(ftEnt.iNumber);
-    return true;
+                    return false;
+                  }
+                  byte[] arrayOfByte = ftEnt.inode.unregisterIndexBlock();
+                  if (arrayOfByte != null)
+                  {
+                    int i = 0;
+                    int j;
+                    while ((j = SysLib.bytes2short(arrayOfByte, i)) != -1) {
+                      this.superblock.returnBlock(j);
+                    }
+                  }
+                  for (int i = 0; i < 11; i++) {
+                    if (ftEnt.inode.direct[i] != -1)
+                    {
+                      this.superblock.returnBlock(ftEnt.inode.direct[i]);
+                      ftEnt.inode.direct[i] = -1;
+                    }
+                  }
+                  ftEnt.inode.toDisk(ftEnt.iNumber);
+                  return true;
 	}
 	
 	// delete specified file per filename parameter

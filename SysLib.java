@@ -119,49 +119,55 @@ public class SysLib {
     /////  Added Functions /////
     public static int format(int files)
     {
-        return -1;
+        return Kernel.interrupt( Kernel.INTERRUPT_SOFTWARE,
+				 Kernel.FORMAT, files, null );
     }
     
     public static int open(String filename, String mode)
     {
-        return -1;
+        String[] args = new String [2];
+        args[0] = filename;
+        args[1] = mode;
+        return Kernel.interrupt( Kernel.INTERRUPT_SOFTWARE,
+				 Kernel.OPEN, 0, args );
     }
     
     public static int read(int fd, byte buffer[])
     {
-        return -1;
+        return Kernel.interrupt( Kernel.INTERRUPT_SOFTWARE,
+				 Kernel.READ, fd, buffer );
     }
     
     public static int write(int fd, byte buffer[])
     {
-        return -1;
+        return Kernel.interrupt( Kernel.INTERRUPT_SOFTWARE,
+				 Kernel.WRITE, fd, buffer );
     }
     
     public static int seek( int fd, int offset, int whence)
     {
-        return -1;
+        int[] args = new int[2];
+        args[0] = offset;
+        args[1] = whence;
+        return Kernel.interrupt( Kernel.INTERRUPT_SOFTWARE,
+				 Kernel.SEEK, fd, args );
     }
     
     public static int close (int fd)
     {
-        FileTableEntry fte = TCB.getFtEnt(fd);
-        if (FileSystem.close(fte))
-        {
-            return 0;
-        }
-        else
-        {
-            return -1;
-        }
+        return Kernel.interrupt( Kernel.INTERRUPT_SOFTWARE,
+				 Kernel.close, fd, null );
     }
     
     public static int delete( String filename)
     {
-        return -1;
+        return Kernel.interrupt( Kernel.INTERRUPT_SOFTWARE,
+				 Kernel.DELETE, 0, filename );
     }
     
     public static int fsize(int fd)
     {
-        return -1;
+        return Kernel.interrupt( Kernel.INTERRUPT_SOFTWARE,
+				 Kernel.SIZE, fd, null );
     }
 }
