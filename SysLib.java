@@ -126,4 +126,34 @@ public class SysLib {
     {
         return -1;
     }
+    
+    public static int read(int fd, byte buffer[])
+    {
+        return -1;
+    }
+    
+    public static int write(int fd, byte buffer[])
+    {
+        return -1;
+    }
+    
+    public static int seek( int fd, int offset, int whence)
+    {
+        return -1;
+    }
+    
+    public static int close (int fd)
+    {
+        return -1;
+    }
+    
+    public static int delete( String filename)
+    {
+        return -1;
+    }
+    
+    public static int fsize(int fd)
+    {
+        return -1;
+    }
 }
