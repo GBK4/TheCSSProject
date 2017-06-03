@@ -144,7 +144,15 @@ public class SysLib {
     
     public static int close (int fd)
     {
-        return -1;
+        FileTableEntry fte = TCB.getFtEnt(fd);
+        if (FileSystem.close(fte))
+        {
+            return 0;
+        }
+        else
+        {
+            return -1;
+        }
     }
     
     public static int delete( String filename)
