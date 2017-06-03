@@ -42,6 +42,11 @@ public class SuperBlock
     // Initialize inodes, free blocks
     public void format(int numBlocks)
     {
+        if (numBlocks < 0)
+        {
+            numBlocks = defaultInodeBlocks;
+        }
+        
         inodeBlocks = numBlocks;
 
         for(short i = 0; i < inodeBlocks; i++)
@@ -50,7 +55,7 @@ public class SuperBlock
             node.toDisk(i);
         }
 
-        freeList = totalBlocks * iNodeSize / Disk.blockSize + 1;
+        freeList = (inodeBlocks / 16) + 2;
 
         for(int i = freeList; i < totalBlocks; i++)
         {
