@@ -71,7 +71,7 @@ public class SuperBlock
     // Dequeue top block in freeList
     public int getFreeBlock()
     {
-        if(freeList < 0 || freeList > totalBlocks)
+        if(freeList <= 0 || freeList > totalBlocks)
             return -1;
 
         int freeBlock = freeList;

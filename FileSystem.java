@@ -184,6 +184,7 @@ public class FileSystem {
 			{
 				// find block that has the file
 				blockFound = ftEnt.inode.findTargetBlock(ftEnt.seekPtr);
+
 				// if no block found, get a free block
 				if (blockFound == -1)
 				{
