@@ -73,12 +73,7 @@ public class FileSystem {
 	// open function finds file entry per filename parameter
 	FileTableEntry open(String filename, String mode) 
 	{
-		FileTableEntry ftEnt = filetable.falloc(filename, mode);
-		if ((mode == "w") && (!deallocAllBlocks(ftEnt)))
-		{
-			return null;
-		}
-		return ftEnt;
+		return filetable.falloc(filename,mode);
 	}
 	
 	// close funtion closes file entry per FileTableEntry parameter
@@ -267,31 +262,6 @@ public class FileSystem {
 		ftEnt.inode.toDisk(ftEnt.iNumber);
 		return bytesWritten;
 	}
-
-	private boolean deallocAllBlocks(FileTableEntry ftEnt) 
-	{
-		if (ftEnt.inode.count != 1) {
-                    return false;
-                  }
-                  byte[] arrayOfByte = ftEnt.inode.unregisterIndexBlock();
-                  if (arrayOfByte != null)
-                  {
-                    int i = 0;
-                    int j;
-                    while ((j = SysLib.bytes2short(arrayOfByte, i)) != -1) {
-                      this.superblock.returnBlock(j);
-                    }
-                  }
-                  for (int i = 0; i < 11; i++) {
-                    if (ftEnt.inode.direct[i] != -1)
-                    {
-                      this.superblock.returnBlock(ftEnt.inode.direct[i]);
-                      ftEnt.inode.direct[i] = -1;
-                    }
-                  }
-                  ftEnt.inode.toDisk(ftEnt.iNumber);
-                  return true;
-	}
 	
 	// delete specified file per filename parameter
 	boolean delete(String filename) 
@@ -316,22 +286,25 @@ public class FileSystem {
         case SEEK_CUR:	ftEnt.seekPtr += offset;
 	        if (ftEnt.seekPtr < 0) 
 	        {
-	        	ftEnt.seekPtr = 0;	// negative seekpointer set to 0, cant be negative
+	        	// negative seekpointer set to 0, cant be negative
+	        	ftEnt.seekPtr = 0
 	        }
 
 	        if (ftEnt.seekPtr > ftEnt.inode.length) 
 	        {
-	        	ftEnt.seekPtr = ftEnt.inode.length;	// seekpointer can be larger then file, if it is, sets Ptr to max file size
+	        	// seekpointer can be larger then file, if it is, sets Ptr to max file size
+	        	ftEnt.seekPtr = ftEnt.inode.length;	
 	        }
 	        break;
 
-        // Offset is relative to the end of the file
+        // block offset is relative to the end of the file
         case SEEK_END:	ftEnt.seekPtr = ftEnt.inode.length + offset;
 	        if (ftEnt.seekPtr < 0) 
 	        {
 	        	ftEnt.seekPtr = 0;
 	        }
-	        if (ftEnt.seekPtr > ftEnt.inode.length) // seekPtr is larger then inode lenght
+	        // check if pointer is larger then inode length
+	        if (ftEnt.seekPtr > ftEnt.inode.length) 
 	        {
 	        	ftEnt.seekPtr = ftEnt.inode.length;	// set seekPtr to inode lenght (end of file)
 	        }
@@ -340,7 +313,8 @@ public class FileSystem {
         default: 
         	return -1;
 	    }	
-	    return ftEnt.seekPtr;	// ptr returned upon success
+	    // return pointer if succesfull
+	    return ftEnt.seekPtr;	
     }
 	}
 	
