@@ -78,7 +78,6 @@ public class Kernel
                   disk.start();
                   
                   // instantiate FileSystem
-                  fs = new FileSystem(1000);
 
                   // instantiate a cache memory
                   cache = new Cache(disk.blockSize, 10);
@@ -86,6 +85,8 @@ public class Kernel
                   // instantiate synchronized queues
                   ioQueue = new SyncQueue();
                   waitQueue = new SyncQueue(scheduler.getMaxThreads());
+                  
+                  fs = new FileSystem(1000);
                   return OK;
                case EXEC:
                   return sysExec((String[])args);
