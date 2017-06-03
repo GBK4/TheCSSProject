@@ -52,9 +52,9 @@ public class FileTable {
                 {
                     if (inode.flag == WRITE)
                     {
-                        /*try {
+                        try {
                             wait();
-                        } catch (InterruptedException e) { }*/
+                        } catch (InterruptedException e) { }
                     }
                     else
                     {
@@ -71,9 +71,9 @@ public class FileTable {
                     } 
                     else 
                     {
-                        /*try {
+                        try {
                             wait();
-                        } catch (InterruptedException e) { }*/
+                        } catch (InterruptedException e) { }
                     }
                 }
             }
