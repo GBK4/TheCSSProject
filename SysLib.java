@@ -26,9 +26,9 @@ public class SysLib {
 				 Kernel.SLEEP, milliseconds, null );
     }
 
-    public static int disk( int type ) {
+    public static int disk( ) {
 	return Kernel.interrupt( Kernel.INTERRUPT_DISK,
-				 type, 0, null );
+				 0, 0, null );
     }
 
     public static int cin( StringBuffer s ) {
@@ -116,29 +116,14 @@ public class SysLib {
 	return n;
     }
     
-    //////  Added for file system  //////
-    /*public static int format( int files ) {
-        if (FileSystem.format(files))
-        {
-            return 0;
-        }
-        else
-        {
-            return -1;
-        }
-    }*/
+    /////  Added Functions /////
+    public static int format(int files)
+    {
+        return -1;
+    }
     
-    /*public static int open( String fileName, String mode ) {
-        FileTableEntry fte = FileSystem.open(fileName, mode);
-        if (fte != null)
-        {
-            int fd = -1;
-            //other stuff
-            return fd;
-        }
-        else
-        {
-            return -1;
-        }
-    }*/
+    public static int open(String filename, String mode)
+    {
+        return -1;
+    }
 }
