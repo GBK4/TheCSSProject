@@ -55,9 +55,9 @@ public class SuperBlock
             node.toDisk(i);
         }
 
-        freeList = (inodeBlocks / 16) + 2;
+        freeList = ((inodeBlocks * iNodeSize) / (Disk.blockSize)) + 1;
 
-        for(int i = freeList; i < totalBlocks; i++)
+        for(int i = freeList; i < inodeBlocks; i++)
         {
             byte[] block = new byte[Disk.blockSize];
 
