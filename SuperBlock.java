@@ -4,9 +4,9 @@ public class SuperBlock
     private final static int defaultInodeBlocks = 64;   // the number of blocks including inodes
     private final static int iNodeSize = 32;            // the size of each inode              
 
-    private int totalBlocks;    // the number of disk blocks
-    private int inodeBlocks;    // the number of inodes
-    private int freeList;       // the block number of the free list's head
+    public int totalBlocks;    // the number of disk blocks
+    public int inodeBlocks;    // the number of inodes
+    public int freeList;       // the block number of the free list's head
 
     public SuperBlock(int diskSize)
     {

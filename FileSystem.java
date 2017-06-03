@@ -287,7 +287,7 @@ public class FileSystem {
 	        if (ftEnt.seekPtr < 0) 
 	        {
 	        	// negative seekpointer set to 0, cant be negative
-	        	ftEnt.seekPtr = 0
+	        	ftEnt.seekPtr = 0;
 	        }
 
 	        if (ftEnt.seekPtr > ftEnt.inode.length) 

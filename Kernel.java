@@ -78,7 +78,7 @@ public class Kernel
                   disk.start();
                   
                   // instantiate FileSystem
-                  fs = new FileSystem (1000);
+                  fs = new FileSystem(1000);
 
                   // instantiate a cache memory
                   cache = new Cache(disk.blockSize, 10);
@@ -176,18 +176,17 @@ public class Kernel
                         return ERROR;
                      case STDOUT:
                         System.out.print((String)args);
-                        break;
+                        return OK;
                      case STDERR:
                         System.err.print((String)args);
-                        break;
+                        return OK;
                   }
-                  
-                   if ((myTcb = scheduler.getMyTcb()) != null) 
+                  if ((myTcb = scheduler.getMyTcb()) != null) 
                   {
                      FileTableEntry ftEnt = myTcb.getFtEnt(param);
                      if (ftEnt != null)
                      {
-                     	return fs.write(ftEnt, (byte[])args)
+                     	return fs.write(ftEnt, (byte[])args);
                      }
                      else
                      {
