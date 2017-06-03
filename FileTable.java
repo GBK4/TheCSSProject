@@ -52,9 +52,9 @@ public class FileTable {
                 {
                     if (inode.flag == WRITE)
                     {
-                        try {
+                        /*try {
                             wait();
-                        } catch (InterruptedException e) { }
+                        } catch (InterruptedException e) { }*/
                     }
                     else
                     {
@@ -71,9 +71,9 @@ public class FileTable {
                     } 
                     else 
                     {
-                        try {
+                        /*try {
                             wait();
-                        } catch (InterruptedException e) { }
+                        } catch (InterruptedException e) { }*/
                     }
                 }
             }
@@ -90,6 +90,8 @@ public class FileTable {
         Inode inode = new Inode(entry.iNumber);
         if (table.remove(entry))
         {
+            notifyAll();
+            inode.flag = USED;
             inode.count--;
             inode.toDisk(entry.iNumber);
             return true;
