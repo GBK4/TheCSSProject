@@ -125,11 +125,11 @@ public class Kernel
                      ioQueue.enqueueAndSleep(COND_DISK_FIN);
                   return OK;
                case SYNC:     // synchronize disk data to a real file
+                  fs.sync();
                   while (disk.sync() == false)
                      ioQueue.enqueueAndSleep(COND_DISK_REQ);
                   while (disk.testAndResetReady() == false)
                      ioQueue.enqueueAndSleep(COND_DISK_FIN);
-                  fs.sync();
                   return OK;
                case READ:
                   switch (param) {
