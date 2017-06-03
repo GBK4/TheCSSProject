@@ -84,19 +84,14 @@ public class FileSystem {
 		{
 			// decrement count of processes using file
 			ftEnt.count--;			
-			// if there are still processes using the file return true
-			if (ftEnt.count > 0)
-			{
-				return true;
-			}
-			else if (ftEnt.count == 0)
+			if (ftEnt.count == 0)
 			{
 				return filetable.ffree(ftEnt);
 			}
-			else
-			{
-				return false;
-			}	
+                        else // if there are still processes using the file return true
+                        {
+                            return true;
+                        }
 		}
 	}
 	
