@@ -156,7 +156,7 @@ public class SysLib {
     public static int close (int fd)
     {
         return Kernel.interrupt( Kernel.INTERRUPT_SOFTWARE,
-				 Kernel.close, fd, null );
+				 Kernel.CLOSE, fd, null );
     }
     
     public static int delete( String filename)
