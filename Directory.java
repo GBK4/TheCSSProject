@@ -1,7 +1,3 @@
-/*
-  Directory.java V1
-  Luke Bushey
-*/
 
 public class Directory {
   private static int maxChars = 30; // max characters of each file name
@@ -116,7 +112,7 @@ public class Directory {
     for (short i = 0; i < fsize.length; i++) 
     {
       String compare = new String(fnames[i], 0, fsize[i]);      
-      if (filename.equals(compare) && (fsize[i] == filename.length()) )  
+      if (filename.equals(compare) && (fsize[i] == filename.length()))  
       {
         return i;
       }
