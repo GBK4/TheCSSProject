@@ -56,8 +56,8 @@ public class SuperBlock
         }
 
         freeList = ((inodeBlocks * iNodeSize) / (Disk.blockSize)) + 1;
-
-        for(int i = freeList; i < inodeBlocks; i++)
+        
+        for(int i = freeList; i < 1000; i++)
         {
             byte[] block = new byte[Disk.blockSize];
 
@@ -87,7 +87,7 @@ public class SuperBlock
     //Enqueue oldBlockNumber to top of freeList
     public boolean returnBlock(int oldBlockNumber)
     {
-        if(oldBlockNumber < 0 || oldBlockNumber > totalBlocks)
+        if(oldBlockNumber <= 0 || oldBlockNumber >= totalBlocks)
             return false;
         
         byte[] block = new byte[Disk.blockSize];
