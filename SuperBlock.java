@@ -71,16 +71,15 @@ public class SuperBlock
     // Dequeue top block in freeList
     public int getFreeBlock()
     {
-        if(freeList <= 0 || freeList > totalBlocks)
+        if(freeList <= 0 || freeList >= totalBlocks)
             return -1;
 
-        int freeBlock = freeList;
+        
         byte[] block = new byte[Disk.blockSize];
 
         SysLib.rawread(freeList, block);
+        int freeBlock = freeList;
         freeList = SysLib.bytes2int(block, 0);
-        SysLib.int2bytes(0, block, 0);
-        SysLib.rawwrite(freeList, block);
 
         return freeBlock;
     }
