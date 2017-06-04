@@ -49,7 +49,6 @@ public class Kernel
    private static Scheduler scheduler;
    private static Disk disk;
    private static Cache cache;
-   private static FileSystem fs;
 
    // Synchronized Queues
    private static SyncQueue waitQueue;  // for threads to wait for their child
@@ -57,6 +56,9 @@ public class Kernel
 
    private final static int COND_DISK_REQ = 1; // wait condition 
    private final static int COND_DISK_FIN = 2; // wait condition
+   
+   // FileSystem
+   private static FileSystem fs;
 
    // Standard input
    private static BufferedReader input
