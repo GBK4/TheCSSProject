@@ -108,6 +108,8 @@ public class Kernel
                         waitQueue.dequeueAndWakeup(myPid, myTid);
                         // I'm terminated!
                         scheduler.deleteThread();
+                        // sync FileSystem
+                        fs.sync();
                         return OK;
                      }
                   }
