@@ -74,11 +74,11 @@ public class SuperBlock
         if(freeList <= 0 || freeList >= totalBlocks)
             return -1;
 
-        
+        int freeBlock = freeList;
         byte[] block = new byte[Disk.blockSize];
 
         SysLib.rawread(freeList, block);
-        int freeBlock = freeList;
+        
         freeList = SysLib.bytes2int(block, 0);
 
         return freeBlock;
