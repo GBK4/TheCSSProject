@@ -1,0 +1,50 @@
+Script started on Sun 04 Jun 2017 03:07:09 PM PDT
+gbk4@uw1-320-12:~/CSS430/ThreadOS$ java b[KBoot
+threadOS ver 1.0:
+Type ? for help
+-->l Test5
+l Test5
+1: format( 48 )...................successfully completed
+Correct behavior of format......................2
+2: fd = open( "css430", "w+" )....successfully completed
+Correct behavior of open........................2
+3: size = write( fd, buf[16] )....successfully completed
+Correct behavior of writing a few bytes.........2
+4: close( fd )....................successfully completed
+Correct behavior of close.......................2
+5: reopen and read from "css430"..successfully completed
+Correct behavior of reading a few bytes.........2
+6: append buf[32] to "css430".....successfully completed
+Correct behavior of appending a few bytes.......1
+7: seek and read from "css430"....successfully completed
+Correct behavior of seeking in a small file.....1
+8: open "css430" with w+..........successfully completed
+Correct behavior of read/writing a small file.0.5
+9: fd = open( "bothell", "w" )....successfully completed
+10: size = write( fd, buf[6656] ).successfully completed
+Correct behavior of writing a lot of bytes....0.5
+11: close( fd )....................successfully completed
+12: reopen and read from "bothell"successfully completed
+Correct behavior of reading a lot of bytes....0.5
+13: append buf[32] to "bothell"...successfully completed
+Correct behavior of appending to a large file.0.5
+14: seek and read from "bothell"...successfully completed
+Correct behavior of seeking in a large file...0.5
+15: open "bothell" with w+.........successfully completed
+Correct behavior of read/writing a large file.0.5
+16: delete("css430")..............successfully completed
+Correct behavior of delete....................0.5
+17: create uwb0-29 of 512*13......successfully completed
+Correct behavior of creating over 40 files ...0.5
+18: uwb0 read b/w Test5 & Test6...
+Test6.java: fd = 3successfully completed
+Correct behavior of parent/child reading the file...0.5
+19: uwb1 written by Test6.java...Test6.java terminated
+Correct behavior of two fds to the same file..0.5
+Test completed
+-->quit
+quit
+egbk4@uw1-320-12:~/CSS430/ThreadOS$ exit
+exit
+
+Script done on Sun 04 Jun 2017 03:08:32 PM PDT
