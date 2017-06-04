@@ -29,7 +29,7 @@ public class Directory {
       fsize[i] = SysLib.bytes2int(data, i * 4);
     }    
     // inital entry character limit
-    int nameLength = (maxChars * 2;)
+    int nameLength = (maxChars * 2);
     int offset = ((fsize.length - 1) * 4);
     String fileName;
     // loop through populating name
