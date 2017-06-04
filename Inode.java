@@ -58,7 +58,7 @@ public class Inode
         byte[] buffer = new byte[Disk.blockSize];
 
         SysLib.rawread(blkNumber, buffer);
-        int offset = (iNumber % iNodeNumPerBlock) * iNodeSize;;
+        int offset = (iNumber % iNodeNumPerBlock) * iNodeSize;
 
         SysLib.int2bytes(length, buffer, offset);
         offset += 4;
