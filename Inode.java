@@ -58,7 +58,7 @@ public class Inode
         byte[] buffer = new byte[Disk.blockSize];
 
         SysLib.rawread(blkNumber, buffer);
-        int offset = (iNumber % iNodeNumPerBlock) * iNodeSize;
+        int offset = (iNumber % iNodeNumPerBlock) * iNodeSize;;
 
         SysLib.int2bytes(length, buffer, offset);
         offset += 4;
@@ -133,14 +133,14 @@ public class Inode
             if(direct[target] >= 0)
                 return -1;
             if((target > 0) && (direct[target - 1] == UNUSED))
-                return -1;
+                return -2;
             
             direct[target] = targetBlockNumber;
             return 0;
         }
 
         if(indirect < 0)
-            return -1;
+            return -3;
         else
         {
             byte[] data = new byte[Disk.blockSize];
