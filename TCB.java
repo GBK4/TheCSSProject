@@ -17,6 +17,7 @@ public class TCB {
     // each entry pointing to a file (structure) table entry
     public FileTableEntry[] ftEnt = null;
 
+    //Constructor
     public TCB(Thread newThread, int myTid, int parentTid) {
 	thread = newThread;
 	tid = myTid;
@@ -30,28 +31,34 @@ public class TCB {
         // fd[0], fd[1], and fd[3] are kept null.
     }
 
+    //Returns the stored thread.
     public synchronized Thread getThread( ) {
 	return thread;
     }
 
+    //Returns the thread's id.
     public synchronized int getTid( ) {
 	return tid;
     }
 
+    //Returns the thread's parent's id.
     public synchronized int getPid( ) {
 	return pid;
     }
 
+    //Sets terminated to true.
     public synchronized boolean setTerminated( ) {
 	terminated = true;
 	return terminated;
     }
 
+    //Returns the value of terminated.
     public synchronized boolean getTerminated( ) {
 	return terminated;
     }
 
     // added for the file system
+    //Finds a empty file descriptor for the entry.
     public synchronized int getFd( FileTableEntry entry ) {
 	if ( entry == null )
 	    return -1;
@@ -65,6 +72,7 @@ public class TCB {
     }
 
     // added for the file system
+    //Finds the entry of the file descriptor and sets the file descriptor to null
     public synchronized FileTableEntry returnFd( int fd ) {
 	if ( fd >= 3 && fd < 32 ) {
 	    FileTableEntry oldEnt = ftEnt[fd];
@@ -76,6 +84,7 @@ public class TCB {
     }
 
     // added for the file system
+    //Finds the entry based ont he file descriptor.
     public synchronized FileTableEntry getFtEnt( int fd ) {
 	if ( fd >= 3 && fd < 32 )
 	    return ftEnt[fd];
