@@ -20,12 +20,14 @@ public class FileTable
     private Vector<FileTableEntry> table;   
     private Directory dir;
 
+    //Constructor
     public FileTable(Directory directory) 
     {
         table = new Vector<FileTableEntry>(); 
         dir = directory;      
     } 
 
+    //A method to allocated a new file table entry based on filename and mode.
     public synchronized FileTableEntry falloc(String filename, String mode) 
     {
         short inumber = -1; 
@@ -33,6 +35,7 @@ public class FileTable
 
         while (true) 
         {
+            //Check if the filename is directory or if it exists.
             if (filename.equals("/"))
             {
                 inumber = (short)0;
@@ -41,14 +44,17 @@ public class FileTable
             {
                 inumber = dir.namei(filename);
             }
-            if (inumber < 0) 
+            //If the file does not exist check if the mode is read.
+            if (inumber < 0)
             {
                 if (mode.equals("r"))
                 {
+                    //If the mode is read, then a new entry shouldn't be created.
                     return null;
                 }
                 else
                 {
+                    //Create a new inode for the new entry.
                     inumber = dir.ialloc(filename);
                     inode = new Inode(inumber);
                     inode.flag = WRITE;
@@ -58,6 +64,8 @@ public class FileTable
             else 
             {
                 inode = new Inode(inumber);
+                //If the mode is read and flag is write, then wait, otherwise 
+                //set the flag to read.
                 if (mode.equals("r"))
                 {
                     if (inode.flag == WRITE)
@@ -74,6 +82,7 @@ public class FileTable
                 }
                 else
                 {
+                    //If the flag is used or unused, set the flag to write.
                     if (inode.flag == USED || inode.flag == UNUSED) 
                     {
                         inode.flag = WRITE;
@@ -81,6 +90,8 @@ public class FileTable
                     } 
                     else 
                     {
+                        //Otherwise the inode is being read and the thread needs
+                        //to wait.
                         try {
                             wait();
                         } catch (InterruptedException e) { }
@@ -89,6 +100,7 @@ public class FileTable
             }
         }
 
+        //Set up the new entry.
         inode.count++;
         inode.toDisk(inumber);
         FileTableEntry entry = new FileTableEntry(inode, inumber, mode);
@@ -96,9 +108,10 @@ public class FileTable
         return entry;
     }
     
+    //A method to free a filetable entry from the table..
     public synchronized boolean ffree(FileTableEntry entry) 
     {
-        if (table.remove(entry))
+        if (table.remove(entry)) //Check if entry is in table and remove it.
         {
             Inode inode = new Inode(entry.iNumber);
             notifyAll();
@@ -113,6 +126,7 @@ public class FileTable
         }
     }
 
+    //A method to check if the table is empty.
     public synchronized boolean fempty() 
     {
         return table.isEmpty();
