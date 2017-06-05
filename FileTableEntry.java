@@ -1,6 +1,6 @@
 // ------------------------------------------------------------------------------------
 // CSS 430 Operating System
-// Program 5: File System
+// Program 5: File System -- FileTableEntry -- description in design documentation
 // Provided Code
 // Luke Bushey
 // Garret King

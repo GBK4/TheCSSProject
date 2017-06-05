@@ -1,6 +1,6 @@
 // ------------------------------------------------------------------------------------
 // CSS 430 Operating System
-// Program 5: File System
+// Program 5: File System -- SuperBlock -- description in design documentation
 // Created on: 05/29/2017
 // Last update: 06/04/2017
 // Luke Bushey

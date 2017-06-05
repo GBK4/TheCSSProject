@@ -1,4 +1,12 @@
-
+// ------------------------------------------------------------------------------------
+// CSS 430 Operating System
+// Program 5: File System -- Directory -- description in design documentation
+// Created on: 05/29/2017
+// Last update: 06/04/2017
+// Luke Bushey
+// Garret King
+// Lan Yang
+// ------------------------------------------------------------------------------------
 public class Directory {
   private static int maxChars = 30; // max characters of each file name
 
@@ -68,7 +76,7 @@ public class Directory {
   // ialloc allocates new inode for the filename
   public short ialloc(String filename)
   {
-    // control 30 character limit
+    // control character limit
     int nameLength;
     if (filename.length() > maxChars)
     {
@@ -112,7 +120,7 @@ public class Directory {
     for (short i = 0; i < fsize.length; i++) 
     {
       String compare = new String(fnames[i], 0, fsize[i]);      
-      if (filename.equals(compare) && (fsize[i] == filename.length()))  
+      if (filename.equals(compare) && (fsize[i] == filename.length()))  O
       {
         return i;
       }

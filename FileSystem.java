@@ -1,9 +1,12 @@
-/*
-  FileSystem.java V1
-  Luke Bushey
-*/
+// ------------------------------------------------------------------------------------
+// CSS 430 Operating System
+// Program 5: File System -- FileSystem -- description in design documentation
+// Provided Code
+// Luke Bushey
+// Garret King
+// Lan Yang
+// ------------------------------------------------------------------------------------
 
-public class FileSystem {
   // objects needed for FS
   private SuperBlock superblock;
   private Directory directory;

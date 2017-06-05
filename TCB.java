@@ -1,6 +1,6 @@
 // ------------------------------------------------------------------------------------
 // CSS 430 Operating System
-// Program 5: File System
+// Program 5: File System -- TCB -- description in design documentation
 // Last update: 06/04/2017
 // Luke Bushey
 // Garret King

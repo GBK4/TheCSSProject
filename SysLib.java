@@ -1,3 +1,11 @@
+// ------------------------------------------------------------------------------------
+// CSS 430 Operating System
+// Program 5: File System -- SysLib -- description in design documentation
+// Provided Code
+// Luke Bushey
+// Garret King
+// Lan Yang
+// ------------------------------------------------------------------------------------
 import java.util.*;
 
 public class SysLib {
