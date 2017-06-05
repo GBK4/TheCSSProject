@@ -1,4 +1,12 @@
-
+// ------------------------------------------------------------------------------------
+// CSS 430 Operating System
+// Program 5: File System
+// Created on: 05/29/2017
+// Last update: 06/04/2017
+// Luke Bushey
+// Garret King
+// Lan Yang
+// ------------------------------------------------------------------------------------
 
 public class Inode
 {
@@ -15,6 +23,7 @@ public class Inode
     public short direct[] = new short[directSize];  // direct pointers
     public short indirect;  // an indirect pointer
 
+    // Default Constructor
     public Inode()
     {
         length = 0;
@@ -27,6 +36,7 @@ public class Inode
         indirect = -1;
     }
 
+    // Overloaded Constructor
     public Inode(short iNumber)
     {
         int blkNumber = iNumber / iNodeNumPerBlock + 1;
@@ -49,6 +59,7 @@ public class Inode
         indirect = SysLib.bytes2short(data, offset);
     }
 
+    // Save inode to Disk
     public void toDisk(short iNumber)
     {
         if(iNumber < 0)
@@ -77,11 +88,13 @@ public class Inode
         SysLib.rawwrite(blkNumber, buffer);
     }
 
+    // Retrun the block index that's registered to this inode
     public int findIndexBlock()
     {
         return indirect;
     }
 
+    // Register an index block to be used by indirect block
     public boolean registerIndexBlock(short indexBlockNumber)
     {
         if(indexBlockNumber < 0)
@@ -106,7 +119,8 @@ public class Inode
         SysLib.rawwrite(indexBlockNumber, data);
         return true;
     }
-
+    
+    // Find and return the location of the block
     public int findTargetBlock(int offset)
     {
         int target = offset / Disk.blockSize;
@@ -123,6 +137,7 @@ public class Inode
         return SysLib.bytes2short(data, iBlock);
     }
 
+    // Register the block into one of the direct or indirect blocks
     public int registerTargetBlock(int offset, short targetBlockNumber)
     {
         int target = offset / Disk.blockSize;
@@ -158,6 +173,7 @@ public class Inode
         return 0;
     }
 
+    // Delete one of the registered block in indirect blocks
     public byte[] unregisterIndexBlock()
     {
         if(indirect == UNUSED)

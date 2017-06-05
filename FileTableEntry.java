@@ -1,3 +1,12 @@
+// ------------------------------------------------------------------------------------
+// CSS 430 Operating System
+// Program 5: File System
+// Provided Code
+// Luke Bushey
+// Garret King
+// Lan Yang
+// ------------------------------------------------------------------------------------
+
 public class FileTableEntry {  // Each table entry should have
     public int seekPtr;        //    a file seek pointer
     public final Inode inode;  //    a reference to an inode

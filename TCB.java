@@ -1,3 +1,12 @@
+// ------------------------------------------------------------------------------------
+// CSS 430 Operating System
+// Program 5: File System
+// Last update: 06/04/2017
+// Luke Bushey
+// Garret King
+// Lan Yang
+// ------------------------------------------------------------------------------------
+
 public class TCB {
     private Thread thread = null;
     private int tid = 0;

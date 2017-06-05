@@ -1,4 +1,12 @@
-
+// ------------------------------------------------------------------------------------
+// CSS 430 Operating System
+// Program 5: File System
+// Created on: 05/29/2017
+// Last update: 06/04/2017
+// Luke Bushey
+// Garret King
+// Lan Yang
+// ------------------------------------------------------------------------------------
 public class SuperBlock
 {
     private final static int defaultInodeBlocks = 64;   // the number of blocks including inodes
@@ -7,9 +15,11 @@ public class SuperBlock
     public int totalBlocks;    // the number of disk blocks
     public int inodeBlocks;    // the number of inodes
     public int freeList;       // the block number of the free list's head
-
+    
+    // Constructor
     public SuperBlock(int diskSize)
     {
+        // read SuperBlock form Disk
         byte[] superBlock = new byte[Disk.blockSize];
         SysLib.rawread(0, superBlock);
 
@@ -17,6 +27,7 @@ public class SuperBlock
         inodeBlocks = SysLib.bytes2int(superBlock, 4);
         freeList = SysLib.bytes2int(superBlock, 8);
 
+        // check if the disk needs to format
         if(totalBlocks == diskSize && inodeBlocks > 0 && freeList >= 2)
             return;
         else
@@ -31,7 +42,8 @@ public class SuperBlock
     public void sync()
     {
         byte[] block = new byte[Disk.blockSize];
-
+        
+        // convert into bytes
         SysLib.int2bytes(totalBlocks, block, 0);
         SysLib.int2bytes(inodeBlocks, block, 4);
         SysLib.int2bytes(freeList, block, 8);
@@ -54,9 +66,10 @@ public class SuperBlock
             Inode node = new Inode();
             node.toDisk(i);
         }
-
+        
         freeList = ((inodeBlocks * iNodeSize) / (Disk.blockSize)) + 1;
         
+        // create new free blocks and write it into Disk
         for(int i = freeList; i < 1000; i++)
         {
             byte[] block = new byte[Disk.blockSize];

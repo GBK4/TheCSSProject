@@ -1,7 +1,16 @@
+// ------------------------------------------------------------------------------------
+// CSS 430 Operating System
+// Program 5: File System
+// Last update: 06/04/2017
+// Luke Bushey
+// Garret King
+// Lan Yang
+// ------------------------------------------------------------------------------------
+
 import java.util.Vector;
 
-public class FileTable {
-
+public class FileTable 
+{
     private final static int UNUSED = 0;
     private final static int USED = 1;
     private final static int READ = 2;
@@ -11,13 +20,14 @@ public class FileTable {
     private Vector<FileTableEntry> table;   
     private Directory dir;
 
-    public FileTable( Directory directory ) {
-        table = new Vector<FileTableEntry>( ); 
+    public FileTable(Directory directory) 
+    {
+        table = new Vector<FileTableEntry>(); 
         dir = directory;      
     } 
 
-
-    public synchronized FileTableEntry falloc( String filename, String mode ) {
+    public synchronized FileTableEntry falloc(String filename, String mode) 
+    {
         short inumber = -1; 
         Inode inode = null;
 
@@ -86,10 +96,11 @@ public class FileTable {
         return entry;
     }
     
-    public synchronized boolean ffree( FileTableEntry entry ) {
-        Inode inode = new Inode(entry.iNumber);
+    public synchronized boolean ffree(FileTableEntry entry) 
+    {
         if (table.remove(entry))
         {
+            Inode inode = new Inode(entry.iNumber);
             notifyAll();
             inode.flag = USED;
             inode.count--;
@@ -102,7 +113,8 @@ public class FileTable {
         }
     }
 
-    public synchronized boolean fempty( ) {
-        return table.isEmpty( );
+    public synchronized boolean fempty() 
+    {
+        return table.isEmpty();
     }
 }
