@@ -7,6 +7,7 @@
 // Lan Yang
 // ------------------------------------------------------------------------------------
 
+public class FileSystem {
   // objects needed for FS
   private SuperBlock superblock;
   private Directory directory;

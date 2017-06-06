@@ -120,7 +120,7 @@ public class Directory {
     for (short i = 0; i < fsize.length; i++) 
     {
       String compare = new String(fnames[i], 0, fsize[i]);      
-      if (filename.equals(compare) && (fsize[i] == filename.length()))  O
+      if (filename.equals(compare) && (fsize[i] == filename.length()))
       {
         return i;
       }
